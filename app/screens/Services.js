@@ -16,6 +16,11 @@ import {
   Text,
   Dimensions
 } from 'react-native';
+
+import {
+  populateDispatcher
+} from '../actions/PopulateDispatcher';
+
 class Services extends Component {
   constructor(props) {
     super(props);
@@ -26,9 +31,7 @@ class Services extends Component {
   }
   // 
   componentWillMount(){
-      this.setState({
-        services: this.props.services
-      })
+      this.props.dispatch(populateDispatcher());
   }  
 
   render() {

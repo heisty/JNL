@@ -1,4 +1,5 @@
 var API_URL = 'http://192.168.30.3:3000/v1';
+//var API_URL = 'http://10.0.2.2:3000/v1';
 //var API_URL = 'https://boiling-journey-93382.herokuapp.com/v1';
 var GEO_URL = 'http://maps.googleapis.com/maps/api/geocode/json?';
 
@@ -34,6 +35,7 @@ exports.LOGIN_ADMIN = `${API_URL}/loginadmin`;
 //POPS
 exports.POP_SERVICES = `${API_URL}/services`;
 exports.POP_STAFF = `${API_URL}/staffBulk`;
+exports.POP_STAFF_SPECIAL = `${API_URL}/staffSpecialBulk`;
 exports.POP_CUST = `${API_URL}/customerBulk`;
 exports.POP_REC = `${API_URL}/getrecords`;
 

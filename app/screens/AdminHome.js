@@ -47,7 +47,7 @@ class AdminHome extends Component {
         key: null,
         actions: [
             NavigationActions.navigate({
-            routeName: "componentNavigation",
+            routeName: "customerAuthNavigation",
           }),
         ]
       });

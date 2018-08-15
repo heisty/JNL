@@ -12,7 +12,10 @@ import styles from './styles';
 import {availService,removeAvailSuccess,saveToActiveService} from '../actions/customerActions';
 
 //import {staff} from '../inappData/staff';
+import {
+  populateSpecialStaff,
 
+} from '../actions/PopulateDispatcher';
 import {
   Text,
   Dimensions,
@@ -24,10 +27,10 @@ import {getStaff} from '../actions/populateActions';
 
 class Purchase extends Component {
   componentWillMount(){
-
-    this.setState({
-      staff: this.props.staff,
-    })
+    
+    let {service} = this.props.navigation.state.params;
+    let servicename = service.title;
+    this.props.dispatch(populateSpecialStaff(servicename));
   
   }
 
@@ -36,9 +39,20 @@ class Purchase extends Component {
         staff: this.props.staff,
      });
 
+    this.timer = setInterval(()=>{
+    let {service} = this.props.navigation.state.params;
+    let servicename = service.title;
+    this.props.dispatch(populateSpecialStaff(servicename));
+  },500)
+
        // geo
 
        
+  }
+
+  componentWillUnmount(){
+    clearInterval(this.timer);
+    this.timer = null;
   }
 
   constructor(props) {
@@ -65,7 +79,7 @@ class Purchase extends Component {
         text: 'Cancel',
       },
       {
-        text: 'Home Avail',   
+        text: 'Home Avail',onPress:()=> this.handleAvailHome(service._id,service.title,"home",this.state.staffid,this.state.selectedPersona),   
       },
       {
         text: 'Salon Avail',onPress:()=> this.handleAvail(service._id,service.title,"salon",id,staffname),
@@ -78,6 +92,8 @@ class Purchase extends Component {
 
 
   }
+
+
 
   handleAvail=(serviceId,servicename,servicetype,staffid,staffname)=>{
 
@@ -104,7 +120,10 @@ class Purchase extends Component {
     }
   }
 
-  handleAvailHome = () =>{
+  handleAvailHome = (id,title,type,staffid,staffname) =>{
+    const {userid,username} = this.props;
+    this.props.dispatch(availService(userid,username,id,title,type,staffid,staffname));
+   this.props.dispatch(saveToActiveService(userid,username,id,title,type,staffid,staffname));
 
   }
   

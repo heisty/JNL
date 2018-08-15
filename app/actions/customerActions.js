@@ -48,7 +48,7 @@ export const custIn=(username,password)=>{
 			if(error.response.status===401){
 				dispatch({
 					type: "RELOGIN",
-					relogin: true,
+					relogin: false,
 					message: "Sorry but wrong password. Or the username is already taken."
 				});
 				dispatch(offlineLogin(null,null));

@@ -67,10 +67,9 @@ class Home extends Component {
     if(this.props.offlineDisplay){
 
     }
-
+    //remove the staff
     this.timer = setInterval(()=>{
     this.props.dispatch(populateDispatcher());
-    this.props.dispatch(populateStaff());
     this.props.dispatch(positionActive(this.props.userid));
     this.props.dispatch(testServerConnection());
     this.props.dispatch(customerActive());
@@ -231,7 +230,7 @@ class Home extends Component {
     if(sign && signDisplay){
          Alert.alert(
         'ACCOUNT CREATED!',
-        'We detected that you are a new one so we took the liberty to create account for you.',
+        'Thank you for creating an account.',
         [
           {text: 'Okay'}
         ],
@@ -298,6 +297,9 @@ class Home extends Component {
                     <Card flexDirection="row" width={width-30} height={60} borderRadius={8} borderWidth={1} alignItems="center" justifyContent="space-between">
                         <Text style={[styles.header,{color:'#000000',fontSize:18,textAlign:'center'}]}>
                             {item.servicename}
+                        </Text>
+                        <Text style={[styles.header,{color:'#000000',fontSize:18,textAlign:'center'}]}>
+                            {item.servicetype}
                         </Text>
                         <Button onPress={()=> this.handleCancel(availid)} width={80} height={40} borderRadius={6} backgroundColor="red">
                             <Text style={[styles.header,{color:'#FFFFFF',fontSize:18,textAlign:'center'}]}>Cancel Order</Text>

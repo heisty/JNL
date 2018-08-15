@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {POP_SERVICES,POP_STAFF,POP_CUST,POP_REC} from '../api';
+import {POP_SERVICES,POP_STAFF,POP_CUST,POP_REC,POP_STAFF_SPECIAL} from '../api';
 
 
 
@@ -14,7 +14,7 @@ export const populateDispatcher = () =>{
 				services
 			});
 			console.warn("POP_SERVICES SUCCEED",services);
-			dispatch(populateStaff());
+			
 		}).catch((error)=>{
 			console.warn("The error is int the populateDispatcher second request with this error: ",error," and this error response: ",error.response);
 		});
@@ -27,6 +27,24 @@ export const populateStaff = () =>{
 		return async function(dispatch){
 		// dispatch the services list 
 		return await axios.post(POP_STAFF).then((response)=>{
+			var staff = response.data.staff;
+			dispatch({
+				type: "POP_STAFF",
+				staff
+			});
+			console.warn("POP_STAFF SUCCEED",staff);
+		}).catch((error)=>{
+			console.warn("The error is int the populateDispatcher second request with this error: ",error," and this error response: ",error.response);
+		});
+
+		
+	}
+}
+
+export const populateSpecialStaff = (servicename) =>{
+		return async function(dispatch){
+		// dispatch the services list 
+		return await axios.post(POP_STAFF_SPECIAL,{servicename}).then((response)=>{
 			var staff = response.data.staff;
 			dispatch({
 				type: "POP_STAFF",
